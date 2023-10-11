@@ -14,12 +14,9 @@ type Query {
 
 type Recipe {
   id: ID!
-  "The name of the recipe"
   name: String
   "An interesting and fun description of the recipe"
   description: String
-  "How much time it takes to cook the recipe, in minutes"
-  cookingTime: Float
   "How much time it takes to prep the ingredients, in minutes"
   prepTime: Float @deprecated(reason: "Use readyTime")
   "How much time it takes in total to prep and cook the recipe, in minutes"
@@ -32,6 +29,12 @@ type Recipe {
   ingredients: [Ingredient]
   "A list of recipes that is related to this particular one, for discoverability"
   relatedRecipes: [Recipe]
+  "A list of cookware"
+  cookware: [Cookware]
+}
+
+type Cookware @key(fields: "name", resolvable: false) {
+  name: String!
 }
 
 type Ingredient {
@@ -42,4 +45,8 @@ type Ingredient {
   name: String
   "A potential substitute for the ingredient, if available"
   substitute: String
+}
+
+type Chef {
+  FirstName: String
 }
